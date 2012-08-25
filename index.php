@@ -12,28 +12,32 @@ for($i = 0; $i < $n_rows; $i++){
 
 ?>
 <div class="hero-unit span8">
+	<h2>Benchmark Graph Generation</h2>
 	<form method="POST" action="display.php" name='display'>
-		<table class="table table-bordered table-condensed">
-		<tr><td>Current Phone</td><td>
-		<select name="current_phone">
-         <option value="">-- Select Current Phone --</option>
-		 <?php for($i=0;$i<count($data);$i++)
-		{
-		 ?>
-         <option value="<?php echo $data[$i][1]; ?>"><?php echo $data[$i][1]; ?></option>
-      <?php } ?>
-      </select>
+	<table class="table table-bordered table-condensed">
+		<tr><td>Select The Phones to Compare</td><td>
+			<select id='searchable' multiple='multiple' name="searchable[]">
+			<?php for($i=0;$i<count($data);$i++)	{ ?>
+			<option value="<?php echo $data[$i][0]; ?>"><?php echo $data[$i][1]; ?></option>
+			<?php } ?>
+			</select>
 		</td></tr>
-		</table>
-		<div class="span6">
-<select id='searchable' multiple='multiple' name="searchable[]">
-   <?php for($i=0;$i<count($data);$i++)
-		{
-		 ?>
-         <option value="<?php echo $data[$i][0]; ?>"><?php echo $data[$i][1]; ?></option>
-      <?php } ?>
-</select>
-</div>
+		<tr><td>Current Phone</td><td>
+			<select name="current_phone">
+			 <option value="">-- Select Current Phone --</option>
+			 <?php for($i=0;$i<count($data);$i++){ ?>
+			 <option value="<?php echo $data[$i][1]; ?>"><?php echo $data[$i][1]; ?></option>
+			<?php } ?>
+			</select>
+		</td></tr>
+		<tr><td>Enter Title</td><td>
+			<input type="text" name="title" class="input-large" placeholder="Enter the Title text for the Graph">
+		</td></tr>
+		<tr><td>Enter Sub-Title</td><td>
+			<input type="text" name="subtitle" class="input-large" placeholder="Enter the Sub-Title text for the Graph">
+		</td></tr>
+	</table>
+
 		<input type="submit" class="btn btn-primary btn-large" value="Display Graph"/><br/>
 	</form> 
 	</div>
