@@ -31,10 +31,16 @@ for($i = 0; $i < $n_rows; $i++){
 			</select>
 		</td></tr>
 		<tr><td>Enter Title</td><td>
-			<input type="text" name="title" class="input-large" placeholder="Enter the Title text for the Graph">
+			<input type="text" name="title" class="input-large" placeholder="Enter the Title text for the Graph" required>
 		</td></tr>
 		<tr><td>Enter Sub-Title</td><td>
-			<input type="text" name="subtitle" class="input-large" placeholder="Enter the Sub-Title text for the Graph">
+			<input type="text" name="subtitle" class="input-large" placeholder="Enter the Sub-Title text for the Graph" required>
+		</td></tr>
+		<tr><td>Enter Image Name</td><td>
+		<div class="input-append">
+			<input type="text" name="image" class="input-large" id="appendedInput" placeholder="Enter the name for the Graph image" required>
+			<span class="add-on">.png</span>
+		</div>
 		</td></tr>
 	</table>
 

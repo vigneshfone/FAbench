@@ -10,6 +10,7 @@ if(!empty($_REQUEST['searchable'])) {
    $current_phone_id=$_REQUEST['current_phone'];
    $title= $_REQUEST['title']?:'Enter the Sample Title for Graph';
    $subtitle= $_REQUEST['subtitle']?:'Sample Subtitle';
+   $image_name= $_REQUEST['image']?:'sample';
 } else {
 echo "Slelect any phones to display chart";
 exit;
@@ -67,7 +68,7 @@ $plot->SetDataType('text-data-yx');
 //$plot->SetPlotType('stackedbars');
 $plot->SetPlotType('bars');
 $val=rand(1,10);
-$plot->SetOutputFile('GeneratedImages/sample'.$val.'.png');
+$plot->SetOutputFile('GeneratedImages/'.$image_name.'.png');
 //$plot->SetPrintImage(False);
 $plot->DrawGraph(); 
 
@@ -86,7 +87,7 @@ echo "<img src=\"" . $plot->EncodeImage() . "\">\n";
 ?>
 <div class="row" style="margin-top:14px;">
 <div class="span12" id="response">
-<p>Graph generated in the path: root/GeneratedImages/sample<?php echo $val.'.png';?></p>
+<p>Graph generated in the path: root/GeneratedImages/<?php echo $image_name.'.png';?></p>
 </div></div>
 </div>
 
