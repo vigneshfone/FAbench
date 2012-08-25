@@ -7,6 +7,8 @@ if(!empty($_REQUEST['searchable'])) {
    $matches = implode(',', $_REQUEST['searchable']);
    $data = array();
    $higlight_phone=$_REQUEST['current_phone'];
+   $title= $_REQUEST['title'];
+   $subtitle= $_REQUEST['subtitle'];
 } else {
 echo "Slelect any phones to display chart";
 exit;
@@ -25,8 +27,8 @@ $plot->SetBgImage('watermark.png', 'scale');
 //$plot->SetPlotAreaBgImage('Veuqs.png', 'scale');
 //$plot->SetPlotAreaPixels(NULL, NULL, 574, 432);
 $plot->SetImageBorderType('solid'); // Improves presentation in the manual
-$plot->SetTitle("Samsung Galaxy S3 Quadrant Comparison");
-$plot->SetXTitle('Another subtitle', 'plotup');//modified core file line no 4500 DrawXTitle() for subtitle positioning
+$plot->SetTitle($title);
+$plot->SetXTitle($subtitle, 'plotup');//modified core file line no 4500 DrawXTitle() for subtitle positioning
 $plot->SetMarginsPixels(NULL, 15, 70);
 //$plot->SetImageBorderColor('#00f0fa');
 $plot->SetBackgroundColor('#ffffff');
