@@ -3,12 +3,13 @@ ini_set('display_erors',1);
 include_once 'style.php';
 include_once 'config.php';
 require_once 'phplot/phplot.php';
+
 if(!empty($_REQUEST['searchable'])) {
    $matches = implode(',', $_REQUEST['searchable']);
    $data = array();
-   $higlight_phone=$_REQUEST['current_phone'];
-   $title= $_REQUEST['title'];
-   $subtitle= $_REQUEST['subtitle'];
+   $current_phone_id=$_REQUEST['current_phone'];
+   $title= $_REQUEST['title']?:'Enter the Sample Title for Graph';
+   $subtitle= $_REQUEST['subtitle']?:'Sample Subtitle';
 } else {
 echo "Slelect any phones to display chart";
 exit;
@@ -16,13 +17,15 @@ exit;
 $db = new DB_Class();
 $result = mysql_query("select phone_name, quadrant from benchmarks left join phone on benchmarks.phone_id= phone.phone_id where quadrant <> 0 and benchmarks.phone_id in ($matches) order by quadrant asc");
 $n_rows = mysql_num_rows($result);
+$current = mysql_query("select phone_name from phone where phone_id= $current_phone_id");
+$current_phone = mysql_fetch_assoc($current);
 for($i = 0; $i < $n_rows; $i++){
  $data[] = mysql_fetch_row($result, MYSQL_NUM);
  }
 
  //$data=conn();
  $plot = new PHPlot(574, 432);
-//$plot->SetIsInline(True);
+$plot->SetIsInline(True);
 $plot->SetBgImage('watermark.png', 'scale');
 //$plot->SetPlotAreaBgImage('Veuqs.png', 'scale');
 //$plot->SetPlotAreaPixels(NULL, NULL, 574, 432);
@@ -64,8 +67,8 @@ $plot->SetDataType('text-data-yx');
 //$plot->SetPlotType('stackedbars');
 $plot->SetPlotType('bars');
 $val=rand(1,10);
-//$plot->SetOutputFile('GeneratedImages/sample'.$val.'.png');
-$plot->SetPrintImage(False);
+$plot->SetOutputFile('GeneratedImages/sample'.$val.'.png');
+//$plot->SetPrintImage(False);
 $plot->DrawGraph(); 
 
 ?>
@@ -74,11 +77,18 @@ $plot->DrawGraph();
 <?php
 function pickcolor($img, $data_array, $row, $col)
 {
-$current_phone = $data_array[$row][0];
-if ($current_phone == $_REQUEST['current_phone']) return 0;
+global $current_phone;
+$current_phone2 = $data_array[$row][0];
+if ($current_phone2 == $current_phone['phone_name']) return 0;
 return 1;
 }
 echo "<img src=\"" . $plot->EncodeImage() . "\">\n";
 ?>
+<div class="row" style="margin-top:14px;">
+<div class="span12" id="response">
+<p>Graph generated in the path: root/GeneratedImages/sample<?php echo $val.'.png';?></p>
 </div></div>
+</div>
+
+</div>
 </div>

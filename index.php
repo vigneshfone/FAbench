@@ -23,10 +23,10 @@ for($i = 0; $i < $n_rows; $i++){
 			</select>
 		</td></tr>
 		<tr><td>Current Phone</td><td>
-			<select name="current_phone">
+			<select name="current_phone" id="current_phone">
 			 <option value="">-- Select Current Phone --</option>
 			 <?php for($i=0;$i<count($data);$i++){ ?>
-			 <option value="<?php echo $data[$i][1]; ?>"><?php echo $data[$i][1]; ?></option>
+			 <option value="<?php echo $data[$i][0]; ?>"><?php echo $data[$i][1]; ?></option>
 			<?php } ?>
 			</select>
 		</td></tr>
@@ -38,7 +38,7 @@ for($i = 0; $i < $n_rows; $i++){
 		</td></tr>
 	</table>
 
-		<input type="submit" class="btn btn-primary btn-large" value="Display Graph"/><br/>
+		<input type="submit" class="btn btn-primary btn-large" id= "graph" value="Display Graph"/><br/>
 	</form> 
 	</div>
 </div>
@@ -47,18 +47,26 @@ for($i = 0; $i < $n_rows; $i++){
 
 ?>
 <script type = "text/javascript">
-/* function change(id,name) {
-//alert(id+' '+name);
-check=document.getElementById("check_list"+id).checked;
-//alert(check);
- if (check) {
-document.getElementById("phone_name"+id).value = name;
-}
-else {
-document.getElementById("phone_name"+id).value = "";
-}
-}
- */
+$('input#graph').click(function(){
+	var current =$('#current_phone').val();
+	var phone =$('#searchable').val();
+	var comp = phone.indexOf(current);
+	//alert(comp);
+	if(phone==null){
+	alert('Select any Phones to proceed');
+	return false;
+	}else if(current==''){
+	alert('Select Current Phone to proceed');
+	return false;
+	}
+	else if(comp < 0){
+	alert('Select Current Phone only from the list of phones you have selected to proceed');
+	return false;
+	}
+	else{
+	return true;
+	}
+});
 $('#searchable').multiSelect({
   selectableHeader: "<input type='text' id='search' autocomplete='off' placeholder='Phone name'>"
 });
