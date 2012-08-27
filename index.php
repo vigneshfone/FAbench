@@ -9,7 +9,6 @@ $n_rows = mysql_num_rows($result);
 for($i = 0; $i < $n_rows; $i++){
  $data[] = mysql_fetch_row($result, MYSQL_NUM);
  }
-
 ?>
 <div class="hero-unit span8">
 	<h2>Benchmark Graph Generation</h2>

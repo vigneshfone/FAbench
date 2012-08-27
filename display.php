@@ -8,9 +8,9 @@ if(!empty($_REQUEST['searchable'])) {
    $matches = implode(',', $_REQUEST['searchable']);
    $data = array();
    $current_phone_id=$_REQUEST['current_phone'];
-   $title= $_REQUEST['title']?:'Enter the Sample Title for Graph';
-   $subtitle= $_REQUEST['subtitle']?:'Sample Subtitle';
-   $image_name= $_REQUEST['image']?:'sample';
+   $title= $_REQUEST['title'];
+   $subtitle= $_REQUEST['subtitle'];
+   $image_name= $_REQUEST['image'];
 } else {
 echo "Slelect any phones to display chart";
 exit;
@@ -21,7 +21,7 @@ $n_rows = mysql_num_rows($result);
 $current = mysql_query("select phone_name from phone where phone_id= $current_phone_id");
 $current_phone = mysql_fetch_assoc($current);
 for($i = 0; $i < $n_rows; $i++){
- $data[] = mysql_fetch_row($result, MYSQL_NUM);
+ $data[] = mysql_fetch_row($result);
  }
 
  //$data=conn();
