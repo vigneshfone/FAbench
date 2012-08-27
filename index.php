@@ -10,9 +10,9 @@ $result = mysql_query("select * from benchmarks");
 	<h2>Benchmark Graph Generation</h2>
 	<form method="POST" action="display.php" name='display'>
 	<table class="table table-bordered table-condensed">
-	<tr><td>Select The processor</td><td>
+	<tr><td>Select The Benchmark</td><td>
 			<select id='processor' name="processor">
-			<option value="">-- Select Current Phone --</option>
+			<option value="">-- Select Benchmark --</option>
 			 <?php for($i=2;$i<mysql_num_fields($result);$i++){ 
 			 $field= mysql_field_name($result, $i);?>
 			 <option value="<?php echo $field; ?>"><?php echo $field; ?></option>

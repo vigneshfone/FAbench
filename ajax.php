@@ -6,9 +6,9 @@ $db = new DB_Class();
 
 if($_POST['id'])
 {
-$id=$_POST['id'];
+$processor=$_POST['id'];
 //echo $id;
-$result = mysql_query("select benchmarks.phone_id, phone_name, $id from benchmarks left join phone on benchmarks.phone_id= phone.phone_id where $id <> 0 order by $id asc");
+$result = mysql_query("select benchmarks.phone_id, phone_name, $processor from benchmarks left join phone on benchmarks.phone_id= phone.phone_id where $processor <> 0 order by $processor asc");
 $data = array();
 $n_rows = mysql_num_rows($result);
 for($i = 0; $i < $n_rows; $i++){
